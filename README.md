@@ -6,7 +6,7 @@
 - React Native Elements ^4.0.0-rc.7
 
 ### APK
--The apk is available [here](https://expo.dev/accounts/viowiti/projects/paya-articles/builds/2e917a5d-6977-4adb-925c-62dac61297e6)
+-The apk is available [here](https://expo.dev/artifacts/eas/6KwvAiRFP8mpnNBST3epE7.apk)
 
 ### OVERVIEW
 - A user Either Logs in or Registers before accessing the application. The user Data is validated with appropriate Errors thrown via the Native android Toast. Since the app does not call any API'S the app works perfectly offline.
