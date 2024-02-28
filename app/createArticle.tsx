@@ -1,5 +1,5 @@
 import { StyleSheet, Text, ToastAndroid, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import TextBox from '../components/TextBox'
 import { ButtonGroup } from '@rneui/base'
 import CustomButton from '../components/CustomButton'
@@ -57,7 +57,7 @@ const createArticle = () => {
     )
 }
 
-export default createArticle
+export default memo(createArticle)
 
 const styles = StyleSheet.create({
     container: {

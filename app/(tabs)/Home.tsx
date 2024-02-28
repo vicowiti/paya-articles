@@ -47,7 +47,7 @@ const Home = () => {
     return (
         <View style={styles.container}>
             <WelcomeCard name={logged?.name as string} />
-            <TouchableOpacity onPress={handleCreate} style={{ flexDirection: "row", alignItems: "center", gap: 5, marginVertical: 10,}}>
+            <TouchableOpacity onPress={handleCreate} style={{ flexDirection: "row", alignItems: "center", gap: 5, marginVertical: 20,}}>
                 
                 <Text>Create Article</Text>
                 <AntDesign name="pluscircle" size={20} color="black" />

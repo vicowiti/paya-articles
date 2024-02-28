@@ -5,19 +5,25 @@ import { Ionicons } from '@expo/vector-icons';
 const _layout = () => {
     return (
         <Tabs screenOptions={{
-headerTintColor:"white",
+            headerTintColor: "white",
             headerStyle: { backgroundColor: '#183B56' },
-            
+            tabBarActiveTintColor: "#183B56",
+
         }}>
 
             <Tabs.Screen name="Home" options={{
                 title: "Home",
-                tabBarIcon: ({color}) => <Ionicons name='home' size={24}  color={color}/>
+                tabBarIcon: ({ color }) => <Ionicons name='home' size={24} color={color} />
             }} />
 
             <Tabs.Screen name="Articles" options={{
                 title: "Articles",
-                tabBarIcon: ({ color }) => <Ionicons name='document' size={24} color={color}/>
+                tabBarIcon: ({ color }) => <Ionicons name='document' size={24} color={color} />
+            }} />
+
+            <Tabs.Screen name="Account" options={{
+                title: "Account",
+                tabBarIcon: ({ color }) => <Ionicons name='person' size={24} color={color} />
             }} />
 
         </Tabs>

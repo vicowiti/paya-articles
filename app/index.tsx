@@ -8,6 +8,7 @@ import { getData, storeData } from '../data/async-storage'
 import { seedArticles } from '../data/seed'
 import { User } from '../types/interfaces'
 
+
 const Page = () => {
 
     const [email, setEmail] = useState("")
@@ -64,14 +65,10 @@ const Page = () => {
         } else {
             ToastAndroid.show("Kindly fill in all the fields", ToastAndroid.SHORT);
         }
-        router.push("/(tabs)/Home")
-
-
-
     }
     return (
         <View style={styles.container}>
-            <View style={{ padding: 40, width: "100%", }}>
+            <View style={{ padding: 20, width: "100%", }}>
 
                 <View style={{ justifyContent: "center", alignItems: "center" }}>
                     <View style={styles.imgcontainer}>
@@ -84,6 +81,7 @@ const Page = () => {
                 </View>
 
                 <View>
+
                     <TextBox placeholder='Enter Email' iconName="mail" value={email} secureTextEntry={false} setter={setEmail} />
                     <TextBox placeholder='Enter Password' iconName="key" value={password} secureTextEntry={true} setter={setPassword} />
                 </View>
