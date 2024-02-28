@@ -1,73 +1,52 @@
 import { StyleSheet, Text, View, Image, Button, Alert, ToastAndroid } from 'react-native'
-import React, { useEffect, useId, useState } from 'react'
+import React, { useState } from 'react'
 import TextBox from '../components/TextBox'
 import CustomButton from '../components/CustomButton'
-import { Link, useRouter } from 'expo-router'
-import { v4 as uuidv4 } from 'uuid';
+import { Link, router } from 'expo-router'
 import { getData, storeData } from '../data/async-storage'
-import { seedArticles } from '../data/seed'
-import { User } from '../types/interfaces'
+import { User } from '../types/interfaces';
 
 const Page = () => {
 
     const [email, setEmail] = useState("")
+    const [name, setName] = useState("")
     const [password, setPassword] = useState("")
 
-    const router = useRouter()
-    const uniqueId = useId();
-
-    useEffect(() => {
-        async function seed() {
-
-            const data = await getData("articles")
-
-            if (data === null) {
-                await storeData("articles", seedArticles)
-                ToastAndroid.show("Articles Seeded", ToastAndroid.SHORT);
-            }
-
-
-        }
-
-        seed()
-
-    },)
-
     const handleSubmit = async () => {
+        const data: User[] | null = await getData("users")
+        if (name && email && password) {
 
-        if (email && password) {
-
-            const existingUsers: User[] = await getData("users")
-            if (existingUsers) {
-
-                const matchUser = existingUsers.find(user => user.email.toLowerCase() === email.toLowerCase())
-
-                if (matchUser) {
-                    const correctPassword = matchUser.password === password;
-
-                    if (correctPassword) {
-                        ToastAndroid.show("Welcome" + matchUser.name, ToastAndroid.SHORT);
-
-                        await storeData("loggedUser", matchUser)
-                        router.push("/(tabs)/Home")
-                    } else {
-                        ToastAndroid.show("Wrong credentials", ToastAndroid.SHORT);
-                    }
-                } else {
-                    ToastAndroid.show("Wrong credentials", ToastAndroid.SHORT);
+            if (!data) {
+                const user: User = {
+                    name,
+                    email,
+                    password
                 }
 
+                await storeData("users", [user])
+                await storeData("loggedUser",user)
+                ToastAndroid.show("Account created", ToastAndroid.SHORT);
+                router.push("/(tabs)/Home")
             } else {
-                ToastAndroid.show("Wrong credentials", ToastAndroid.SHORT);
+                const exists = data.find(item => item.email.toLowerCase() === email.toLowerCase())
+
+                if (exists) {
+                    ToastAndroid.show("User Already Exists", ToastAndroid.SHORT);
+                } else {
+                    await storeData("users", [...data, {
+                        name, email, password
+                    }])
+
+                    ToastAndroid.show("Account created", ToastAndroid.SHORT);
+                    await storeData("loggedUser", {
+                        name, email, password
+                    })
+                    router.push("/(tabs)/Home")
+                }
             }
-
         } else {
-            ToastAndroid.show("Kindly fill in all the fields", ToastAndroid.SHORT);
+            ToastAndroid.show("Fill in all Fields", ToastAndroid.SHORT);
         }
-        router.push("/(tabs)/Home")
-
-
-
     }
     return (
         <View style={styles.container}>
@@ -84,13 +63,14 @@ const Page = () => {
                 </View>
 
                 <View>
+                    <TextBox placeholder='Enter Name' iconName="person" value={name} secureTextEntry={false} setter={setName} />
                     <TextBox placeholder='Enter Email' iconName="mail" value={email} secureTextEntry={false} setter={setEmail} />
                     <TextBox placeholder='Enter Password' iconName="key" value={password} secureTextEntry={true} setter={setPassword} />
                 </View>
 
-                <CustomButton title='Submit' buttonHandler={handleSubmit} />
-                <Link href={`/register`} asChild>
-                    <Text style={{ color: "#fff", fontWeight: "300" }}>New Here? Register</Text>
+                <CustomButton title='Create' buttonHandler={handleSubmit} />
+                <Link href={`/`} asChild>
+                    <Text style={{ color: "#fff", fontWeight: "300" }}>Got an Acount? Login</Text>
                 </Link>
             </View>
 

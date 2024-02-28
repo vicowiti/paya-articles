@@ -9,10 +9,11 @@ const TextBox = (props: TextBoxProps) => {
         <Input
             placeholder={props.placeholder}
             value={props.value}
-            leftIcon={<Ionicons name={props.iconName} size={28} color="orange" />}
+            leftIcon={<Ionicons name={props.iconName} size={28} color="#f4511e" />}
             secureTextEntry={props.secureTextEntry}
             style={styles.input}
             onChangeText={value => props.setter(value)}
+            multiline={props.multiline}
         />
     )
 }
@@ -22,7 +23,7 @@ export default TextBox
 const styles = StyleSheet.create({
     input: {
         width: "80%",
-        color: "orange",
+        color: "#f4511e",
         padding: 10
     }
 })
