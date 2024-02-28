@@ -21,6 +21,10 @@
 
 -Routing is handled elegantly by expo-router 3, enabling seamless navuigation through the screens.
 
+### WHY FLASHLIST
+
+- Offers a performance boost vs the native Flatlist, due to the way it handles js objects. It reuses memory locations previously used, unlike the flatlist that recreates objects on every render.
+
 ## SCREENSHOTS
 
 ![LOGIN](./SCREENS/LOGIN.jpg)
