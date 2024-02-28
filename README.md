@@ -1,9 +1,9 @@
 # PAYA TEST
 
 ### TECH STACK
-- React Native
-- Expo SDK 50
-- React Native Elements
+- React Native 0.73.4
+- Expo SDK ~50.0.8
+- React Native Elements ^4.0.0-rc.7
 
 ### OVERVIEW
 - A user Either Logs in or Registers before accessing the application. The user Data is validated with appropriate Errors thrown via the Native android Toast. Since the app does not call any API'S the app works perfectly offline.
