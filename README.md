@@ -4,6 +4,7 @@
 - React Native 0.73.4
 - Expo SDK ~50.0.8
 - React Native Elements ^4.0.0-rc.7
+- Flashlist
 
 ### APK
 -The apk is available [here](https://expo.dev/artifacts/eas/6KwvAiRFP8mpnNBST3epE7.apk)

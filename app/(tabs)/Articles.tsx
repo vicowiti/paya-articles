@@ -4,6 +4,7 @@ import { ButtonGroup } from '@rneui/base';
 import { getData } from '../../data/async-storage';
 import { Article } from '../../types/interfaces';
 import ArticleCard from '../../components/ArticleCard';
+import { FlashList } from '@shopify/flash-list';
 
 const Articles = () => {
     const [articles, setArticles] = useState<Article[]>([])
@@ -43,8 +44,13 @@ const Articles = () => {
                 containerStyle={{ marginBottom: 20 }}
             />
 
-            <View>
-                {filteredArticles.map(article => <ArticleCard key={article.id} article={article} />)}
+            <View style={{flex: 1}}>
+                <FlashList
+                    estimatedItemSize={150}
+                    data={articles}
+                    renderItem={({ item, index }) => <ArticleCard key={item.id} article={item} />}
+                    keyExtractor={(item, index) => String(index)}
+                />
             </View>
             {filteredArticles.length < 1 && <Text style={{textAlign: "center"}}>No Articles Here</Text>}
         </View>

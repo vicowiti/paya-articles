@@ -6,6 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Article, User } from '../../types/interfaces';
 import { getData } from '../../data/async-storage';
 import ArticleCard from '../../components/ArticleCard';
+import { FlashList } from '@shopify/flash-list';
 
 const Home = () => {
 
@@ -59,10 +60,16 @@ const Home = () => {
                 </Link>
             </View>
 
-            <ScrollView>
-                {articles.map(article => <ArticleCard key={article.id} article={article} />)}
-                {articles.map(article => <ArticleCard key={article.id} article={article} />)}
-            </ScrollView>
+            <View style={{flex: 1}}>
+
+                <FlashList
+                    estimatedItemSize={150}
+                    data={articles}
+                    renderItem={({ item, index }) => <ArticleCard key={item.id} article={item} />}
+                    keyExtractor={(item, index) => String(index)}
+                />
+               
+            </View>
         </View>
     )
 }
@@ -71,7 +78,8 @@ export default Home
 
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        padding: 20,
+        flex:1
     },
     row: {
         flexDirection: "row",
